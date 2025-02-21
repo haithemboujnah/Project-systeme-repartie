@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option go_package = "./factorization_pb";
+
+service PrimeFactorizationService {
+    // Requête/Réponse
+    rpc GetPrimeFactors (NumberRequest) returns (PrimeFactorsResponse);
+    
+    // Flux bidirectionnel
+    rpc GetPrimeFactorsStream (stream NumberRequest) returns (stream PrimeFactorsResponse);
+}
+
+message NumberRequest {
+    int64 number = 1;
+}
+
+message PrimeFactorsResponse {
+    repeated int64 factors = 1;
+}
