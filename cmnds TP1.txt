@@ -1,0 +1,25 @@
+sudo apt update
+sudo apt install build-essential rpcbind
+
+sudo apt-get update
+sudo apt-get install libtirpc-dev
+
+sudo apt-get install build-essential libtirpc-dev rpcbind
+
+
+cd /mnt/c/Users/haith/Desktop/tp
+rpcgen -a calcul.x
+rpcgen calcul.x
+
+
+gcc -o cal_server calcul_svc.c calcul_xdr.c calcul_server.c -lnsl -ltirpc -lm -I/usr/include/tirpc/
+gcc -o cal_client calcul_clnt.c calcul_xdr.c calcul_client.c -lnsl -ltirpc -I/usr/include/tirpc/
+
+
+rpcinfo -p localhost
+ps aux | grep cal_server
+
+./cal_server
+
+./cal_client localhost
+
